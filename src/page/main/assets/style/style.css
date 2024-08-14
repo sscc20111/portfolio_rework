@@ -1,0 +1,57 @@
+.MainWrap.container {max-width: 1000px;}
+.MainWrap section {}
+
+/* ===== section01(Grid Section) ===== */
+/* Design Style */
+.MainWrap .section01 {display: grid; grid-template-columns: 1fr;}
+.MainWrap .section01 .gridItems {display: grid; grid-template-columns: 1fr 1fr;}
+.MainWrap .section01 .gridItems > div {position: relative;}
+.MainWrap .section01 .gridItems .gridItem1 {}
+.MainWrap .section01 .gridItems .gridItem2 {}
+.MainWrap .section01 .gridItems .gridItem3 {}
+.MainWrap .section01 .gridItems .textBox {}
+.MainWrap .section01 .gridItems .textBox .textWrap {position: relative; z-index: 9;}
+.MainWrap .section01 .gridItems .textBox .textWrap a {display: inline-block; padding: 0.4rem 0; font-size: 4.3rem; font-weight: 600; color: #212529; transition: color 0.3s ease-in-out; cursor: pointer;}
+.MainWrap .section01 .gridItem2 .textBox .textWrap a {text-align: right;}
+.MainWrap .section01 .gridItems .textBox .textWrap a:hover {color: #3c4758;}
+.MainWrap .section01 .gridItems .textBox .textWrap h4 {padding: 0.4rem 0; font-size: 4.3rem; font-weight: 300;}
+.MainWrap .section01 .gridItems .textBox .textWrap h5 {padding: 0.4rem 0; font-size: 3.3rem; font-weight: 600; text-align: right;}
+.MainWrap .section01 .gridItems .textBox .textWrap p {margin-top: 3rem; font-size: 1rem; line-height: 1.4; font-weight: 300;}
+
+.MainWrap .section01 .gridItems .imgBox {width: 100%; height: 100%;}
+.MainWrap .section01 .gridItems .imgBox figure {aspect-ratio: 1; max-height: 382px; overflow: hidden;}/*이미지 크기에 맞춰 유동적으로 되게끔 수정필요*/
+.MainWrap .section01 .gridItems .imgBox figure img {width: 100%; height: 100%; transform: scale(1.2);}
+
+.MainWrap .section01 .gridItems > div .cover  {position: absolute; top: 0;bottom: 0;right: 0; background-color: #b89569; z-index: 99;}
+.MainWrap .section01 .gridItems .textBox .cover {width: 100%; z-index: 8;}
+.MainWrap .section01 .gridItems .imgBox .cover {left: 0;}
+
+/* Animation Style */
+.MainWrap .section01 {gap: 0px; transition: all .5s cubic-bezier(.65,.05,.36,1);}
+.MainWrap .section01 .gridItems {gap: 0px; transition: all .5s cubic-bezier(.65,.05,.36,1);}
+.MainWrap .section01.active {gap: 20px;}
+.MainWrap .section01.active .gridItems {gap: 20px;}
+.MainWrap .section01.active .gridItems.active:nth-child(1) {grid-template-columns: 3fr 2fr;}
+.MainWrap .section01.active .gridItems.active:nth-child(2) {grid-template-columns: 2fr 3fr;}
+.MainWrap .section01.active .gridItems.active:nth-child(3) {grid-template-columns: 7fr 8fr;}
+.MainWrap .section01 .gridItems .textBox .textWrap {opacity: 0; transition: all .5s cubic-bezier(.65,.05,.36,1);}
+.MainWrap .section01 .gridItems .textBox .textWrap.active {display: flex; flex-direction: column; opacity: 1;}
+.MainWrap .section01 .gridItems:nth-child(3) .imgBox{width: 100%;transition: all .5s cubic-bezier(.65,.05,.36,1);}
+.MainWrap .section01 .gridItems > div .cover  {transition: all .5s cubic-bezier(.65,.05,.36,1);}
+.MainWrap .section01.active .gridItems.active .textBox .cover.active {width: 382px;}/*이미지 크기에 맞춰 유동적으로 되게끔 수정필요*/
+.MainWrap .section01.active .gridItems.active:nth-child(3) .textBox .cover.active {width: 80%; top: 10%;bottom: 10%;}
+
+/* 임시 */
+
+
+
+
+
+
+
+.MainWrap .section02 {}
+.MainWrap .section03 {}
+.MainWrap .section04 {}
+.MainWrap .section05 {}
+
+
