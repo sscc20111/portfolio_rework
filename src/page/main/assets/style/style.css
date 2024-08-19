@@ -1,5 +1,5 @@
 .MainWrap.container {max-width: 1000px;}
-.MainWrap section {}
+.MainWrap section {margin-bottom: 5rem;}
 
 /* ===== section01(Grid Section) ===== */
 /* Design Style */
@@ -10,13 +10,15 @@
 .MainWrap .section01 .gridItems .gridItem2 {}
 .MainWrap .section01 .gridItems .gridItem3 {}
 .MainWrap .section01 .gridItems .textBox {}
-.MainWrap .section01 .gridItems .textBox .textWrap {position: relative; z-index: 9;}
+.MainWrap .section01 .gridItems .textBox .textWrap {position: relative; display: flex; flex-direction: column; align-items: baseline; z-index: 9;}
 .MainWrap .section01 .gridItems .textBox .textWrap a {display: inline-block; padding: 0.4rem 0; font-size: 4.3rem; font-weight: 600; color: #212529; transition: color 0.3s ease-in-out; cursor: pointer;}
-.MainWrap .section01 .gridItem2 .textBox .textWrap a {text-align: right;}
 .MainWrap .section01 .gridItems .textBox .textWrap a:hover {color: #3c4758;}
 .MainWrap .section01 .gridItems .textBox .textWrap h4 {padding: 0.4rem 0; font-size: 4.3rem; font-weight: 300;}
 .MainWrap .section01 .gridItems .textBox .textWrap h5 {padding: 0.4rem 0; font-size: 3.3rem; font-weight: 600; text-align: right;}
 .MainWrap .section01 .gridItems .textBox .textWrap p {margin-top: 3rem; font-size: 1rem; line-height: 1.4; font-weight: 300;}
+.MainWrap .section01 .gridItem2 .textBox .textWrap {align-items: flex-end;}
+.MainWrap .section01 .gridItem2 .textBox .textWrap h4 {width: 100%;}
+.MainWrap .section01 .gridItem2 .textBox .textWrap a {text-align: right;}
 
 .MainWrap .section01 .gridItems .imgBox {width: 100%; height: 100%;}
 .MainWrap .section01 .gridItems .imgBox figure {aspect-ratio: 1; max-height: 382px; overflow: hidden;}/*이미지 크기에 맞춰 유동적으로 되게끔 수정필요*/
@@ -26,7 +28,8 @@
 .MainWrap .section01 .gridItems .textBox .cover {width: 100%; z-index: 8;}
 .MainWrap .section01 .gridItems .imgBox .cover {left: 0;}
 
-/* Animation Style */
+/* ===== Animation Style ===== */
+/* motion1 - 그리드 정렬 */
 .MainWrap .section01 {gap: 0px; transition: all .5s cubic-bezier(.65,.05,.36,1);}
 .MainWrap .section01 .gridItems {gap: 0px; transition: all .5s cubic-bezier(.65,.05,.36,1);}
 .MainWrap .section01.active {gap: 20px;}
@@ -34,14 +37,47 @@
 .MainWrap .section01.active .gridItems.active:nth-child(1) {grid-template-columns: 3fr 2fr;}
 .MainWrap .section01.active .gridItems.active:nth-child(2) {grid-template-columns: 2fr 3fr;}
 .MainWrap .section01.active .gridItems.active:nth-child(3) {grid-template-columns: 7fr 8fr;}
-.MainWrap .section01 .gridItems .textBox .textWrap {opacity: 0; transition: all .5s cubic-bezier(.65,.05,.36,1);}
-.MainWrap .section01 .gridItems .textBox .textWrap.active {display: flex; flex-direction: column; opacity: 1;}
+.MainWrap .section01 .gridItems > div {transition: all .5s cubic-bezier(.65,.05,.36,1);}/*gap:20px 상쇄*/
+.MainWrap .section01 .gridItem1 > div {padding: 0 0 10px;}
+.MainWrap .section01 .gridItem2 > div {padding: 10px 0;}
+.MainWrap .section01 .gridItem3 > div {padding: 10px 0 0;}
+.MainWrap .section01.active .gridItems > div {padding: 0px;}
+/* motion2 - 커버 모션 */
 .MainWrap .section01 .gridItems:nth-child(3) .imgBox{width: 100%;transition: all .5s cubic-bezier(.65,.05,.36,1);}
 .MainWrap .section01 .gridItems > div .cover  {transition: all .5s cubic-bezier(.65,.05,.36,1);}
 .MainWrap .section01.active .gridItems.active .textBox .cover.active {width: 382px;}/*이미지 크기에 맞춰 유동적으로 되게끔 수정필요*/
 .MainWrap .section01.active .gridItems.active:nth-child(3) .textBox .cover.active {width: 80%; top: 10%;bottom: 10%;}
+/* motion3 - 텍스트 fade in */
+.MainWrap .section01 .gridItems .textBox .textWrap {opacity: 0; transition: all .5s cubic-bezier(.65,.05,.36,1);}
+.MainWrap .section01 .gridItems .textBox .textWrap.active {opacity: 1;}
+
+
+/* ===== section02(About Section) ===== */
+.MainWrap .section02 {display: flex;}
+.MainWrap .section02 h2 {margin-bottom: 1.5rem; font-size: 2rem; font-weight: 600; color: rgba(115, 90, 60, 1);}
+.MainWrap .section02 h3 {margin-bottom: 1.3rem; font-size: 1.3rem; font-weight: 600;}
+.MainWrap .section02 h3 span {font-size: 1rem; font-weight: 300;}
+.MainWrap .section02 h4 {margin-bottom: 1rem; font-size: 1rem; font-weight: 600;}
+.MainWrap .section02 p {font-size: 1rem; font-weight: 300;}
+.MainWrap .section02 span {font-size: 0.8rem; color: #7d7d7d; font-weight: 300;}
+.MainWrap .section02 a {}
+
+.MainWrap .section02 .leftBox {}
+.MainWrap .section02 .leftBox .contents:not(:last-child) {margin-bottom: 3.5rem;}
+.MainWrap .section02 .leftBox .contents .item:not(:last-child) {margin-bottom: 1.6rem;}
+.MainWrap .section02 .leftBox .contents .item ul {padding-left: 0.5rem;}
+.MainWrap .section02 .leftBox .contents .item ul li:not(:last-child) {margin-bottom: 1rem;}
+.MainWrap .section02 .leftBox .content3 .item ul li::before { margin-right: 0.5rem; font-weight: 600; content: '·'; display: inline-block;}
+
+.MainWrap .section02 .leftBox .item ul li {}
+.MainWrap .section02 .leftBox .item ul li span {}
+
+.MainWrap .section02 .rightBox {}
+.MainWrap .section02 .rightBox .thumbnailBox {transition: 0.3s cubic-bezier(0.2, 0.6, 0.6, 0.9);}
+
 
 /* 임시 */
+.MainWrap .section02 .rightBox .thumbnailBox {padding: 30px; background-color: #3c4758; color: white; }
 
 
 
@@ -49,7 +85,9 @@
 
 
 
-.MainWrap .section02 {}
+
+
+
 .MainWrap .section03 {}
 .MainWrap .section04 {}
 .MainWrap .section05 {}
