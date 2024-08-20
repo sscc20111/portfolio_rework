@@ -34,7 +34,7 @@ const ThumbnailMotion = () => {//썸네일 이동 모션 (css '.thumbnailBox' - 
             trigger: ".section02",
             start: "top center",
             end: "bottom center",
-            onUpdate: self => {gsap.set('.thumbnailBox', { y: self.progress * target.offsetHeight });}//.section02의 height 값에 백분율을 곱한값
+            onUpdate: self => {gsap.set('.section02 .thumbnailBox', { y: self.progress * target.offsetHeight });}//.section02의 height 값에 백분율을 곱한값
         }
     });
 }

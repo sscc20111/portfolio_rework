@@ -1,5 +1,6 @@
 .MainWrap.container {max-width: 1000px;}
 .MainWrap section {margin-bottom: 5rem;}
+.MainWrap section h2 {margin-bottom: 1.5rem; font-size: 2rem; font-weight: 600; color: rgba(115, 90, 60, 1);}
 
 /* ===== section01(Grid Section) ===== */
 /* Design Style */
@@ -54,7 +55,6 @@
 
 /* ===== section02(About Section) ===== */
 .MainWrap .section02 {display: flex;}
-.MainWrap .section02 h2 {margin-bottom: 1.5rem; font-size: 2rem; font-weight: 600; color: rgba(115, 90, 60, 1);}
 .MainWrap .section02 h3 {margin-bottom: 1.3rem; font-size: 1.3rem; font-weight: 600;}
 .MainWrap .section02 h3 span {font-size: 1rem; font-weight: 300;}
 .MainWrap .section02 h4 {margin-bottom: 1rem; font-size: 1rem; font-weight: 600;}
@@ -80,15 +80,48 @@
 .MainWrap .section02 .rightBox .thumbnailBox {padding: 30px; background-color: #3c4758; color: white; }
 
 
+/* ===== section03(Projects Section) ===== */
+.MainWrap .section03 {gap: 5%; display: grid; grid-template-columns: 1fr 1fr;}
+.MainWrap .section03 h3 {margin-bottom: 1rem; font-size: 0.9rem; font-weight: 300;}
+.MainWrap .section03 p {}
+.MainWrap .section03 span {}
+
+.MainWrap .section03 .listWrap {}
+.MainWrap .section03 .listWrap > div {}
+.MainWrap .section03 .listWrap > div:not(:last-child) {margin-bottom: 2rem;}
+.MainWrap .section03 .listWrap > div ul {}
+.MainWrap .section03 .listWrap > div ul li {}
+.MainWrap .section03 .listWrap > div ul li:not(:last-child) {margin-bottom: 0.8rem;}
+.MainWrap .section03 .listWrap > div ul li button {width: 100%; display: flex; align-items: center;}
+.MainWrap .section03 .listWrap > div ul li button span {display: block;}
+.MainWrap .section03 .listWrap > div ul li button span.bullet {position: relative; margin-right: 0.5rem; height: 1rem; width: 1rem; border-radius: 100%; border: 1px solid #212529;}
+.MainWrap .section03 .listWrap > div ul li button span.bullet::before {content: ''; position: absolute; display: block; width: 0%; height: 0%; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 100%; background-color: #212529; transition: 0.2s cubic-bezier(0.2, 0.6, 0.6, 0.9);}
+.MainWrap .section03 .listWrap > div ul li button.select span.bullet::before,
+.MainWrap .section03 .listWrap > div ul li button.active span.bullet::before {width: 100%; height: 100%;}
+.MainWrap .section03 .listWrap > div ul li button span.line {margin-left: 2rem; flex: 1 1; height: 1px; background-color: #000;}
+
+.MainWrap .section03 .viewWrap {}
+.MainWrap .section03 .viewWrap .viewBox {}
+.MainWrap .section03 .viewWrap .viewBox .thumbnailBox {}
+.MainWrap .section03 .viewWrap .viewBox .thumbnailBox a {cursor: pointer;}
+.MainWrap .section03 .viewWrap .viewBox .thumbnailBox a img {}
+.MainWrap .section03 .viewWrap .viewBox .infoWrap {padding-top: 2rem;}
+.MainWrap .section03 .viewWrap .viewBox .infoWrap h4 {text-transform: uppercase;}
+.MainWrap .section03 .viewWrap .viewBox .infoWrap ul {}
+.MainWrap .section03 .viewWrap .viewBox .infoWrap ul li {}
+.MainWrap .section03 .viewWrap .viewBox .infoWrap .info_desc {margin: 1rem 0;}
+.MainWrap .section03 .viewWrap .viewBox .infoWrap .info_desc li {font-size: 1rem; font-weight: 300;}
+.MainWrap .section03 .viewWrap .viewBox .infoWrap .info_desc li::before {margin-right: 0.5rem; font-weight: 600; content: '·'; display: inline-block;}
+.MainWrap .section03 .viewWrap .viewBox .infoWrap .info_desc li:not(:last-child) {margin-bottom: 0.5rem;}
+.MainWrap .section03 .viewWrap .viewBox .infoWrap .info_skills {display: flex;}
+.MainWrap .section03 .viewWrap .viewBox .infoWrap .info_skills li {padding: 0.3rem 0.8rem; font-size: .8rem; border-radius: 0.4rem; font-weight: 100; background-color: rgba(55,55,67,.7); color: #fff; white-space: nowrap;}
+.MainWrap .section03 .viewWrap .viewBox .infoWrap .info_skills li:not(:last-child) {margin-right: 0.5rem;}
 
 
 
 
 
 
-
-
-.MainWrap .section03 {}
 .MainWrap .section04 {}
 .MainWrap .section05 {}
 
