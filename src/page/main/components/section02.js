@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+import ThumbnailComponent from '../assets/js/thumbnail';
+
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -40,9 +42,9 @@ const ThumbnailMotion = () => {//썸네일 이동 모션 (css '.thumbnailBox' - 
 }
 
 const AboutSection = () => {
-    const [thumbnail, setthumbnail] = useState('thumbnail1');
+    const [thumbnailItem, setthumbnailItem] = useState('thumbnail1');
     useEffect(()=>{
-        ThumbnailSet(setthumbnail)
+        ThumbnailSet(setthumbnailItem)
         ThumbnailMotion()
     },[])
     return(
@@ -121,7 +123,7 @@ const AboutSection = () => {
         <div className='rightBox'>
             <div className='thumbnailBox'>
                 {/* 프론트앤드 개발 필요 */}
-                <div className='TempElement'>{thumbnail}</div>
+                <ThumbnailComponent thumbnailItem={thumbnailItem}></ThumbnailComponent>
             </div>
         </div>
         </>
