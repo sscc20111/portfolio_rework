@@ -119,10 +119,33 @@
 
 
 
-
-
-
+/* ===== section03(Projects Section) ===== */
 .MainWrap .section04 {}
+.MainWrap .section04 .contactWrap {display: flex;}
+.MainWrap .section04 .contactWrap .leftBox h3 {margin: 0 0 2rem; font-size: 3rem; font-weight: 600;}
+.MainWrap .section04 .contactWrap .leftBox p {font-size: 2rem; font-weight: 300;}
+.MainWrap .section04 .contactWrap .leftBox span {font-size: 1.5rem; font-weight: 100;}
+
+.MainWrap .section04 .contactWrap .leftBox {width: 50%;}
+.MainWrap .section04 .contactWrap .leftBox ul {}
+.MainWrap .section04 .contactWrap .leftBox ul li {margin: 0 0 1rem;}
+.MainWrap .section04 .contactWrap .leftBox ul li:nth-child(1) {display: flex; align-items: flex-end;}
+
+
+.MainWrap .section04 .contactWrap .rightBox {width: 50%;}
+.MainWrap .section04 .contactWrap .rightBox .gform {}
+.MainWrap .section04 .contactWrap .rightBox .gform .inputWrap {}
+.MainWrap .section04 .contactWrap .rightBox .gform .inputWrap > div {margin: 0 0 1rem;}
+.MainWrap .section04 .contactWrap .rightBox .gform .inputWrap > div textarea {height: 10rem;}
+.MainWrap .section04 .contactWrap .rightBox .gform button { padding: 0.5rem 1rem; border: 0; transition: all 150ms ease-in-out; border-radius: 0.5rem; color: #111727; background-color: #FFFFFF; background-image: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, #F9FAFB 100%); box-shadow: rgba(229, 231, 235, 0.9) 0 0 0 1px inset, rgba(209, 213, 219, 0.95) 0 -1px 2px 0 inset, rgba(17, 24, 39, 0.04) 0 1px 1px 0; }
+.MainWrap .section04 .contactWrap .rightBox .gform button:hover {filter: brightness(0.98);}
+.MainWrap .section04 .contactWrap .rightBox .gform button:active { background-image: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, #F9FAFB 100%); box-shadow: rgba(229, 231, 235, 0.9) 0 0 0 1px inset, rgba(209, 213, 219, 0.95) 0 1px 2px 0 inset; }
+
+
+
+
+
+
 .MainWrap .section05 {}
 
 
