@@ -9,10 +9,10 @@ const canvasJs = (selecter, option) => {
     const CentserX = canvas.width/2;  //중심 x
     const CentserY = canvas.height/2; //중심 y
 
-    const total = 10; //point 개수
+    const total = 5; //point 개수
     const limit = 30; //움직임 반경
-    const PointSpeed = 0.0002; //point속도 제어
-    const rotationSpeed = 0.00003; //축 회전속도 제어
+    const PointSpeed = 0.001; //point속도 제어
+    const rotationSpeed = 0.0001; //축 회전속도 제어
 
     //변동상수
     let angle = 0;
@@ -49,10 +49,19 @@ const canvasJs = (selecter, option) => {
 
         ctx.beginPath()
         Array.from({ length: total }).forEach((_, index) => {
-            ctx.moveTo((update(index).x*2 - update(index).a), (update(index).y*2 - (update(index).b)));
-            ctx.lineTo(update(index).a, update(index).b);
+            ctx.moveTo(update(index).cp2X, update(index).cp2Y);
+            ctx.lineTo(update(index).cp1X, update(index).cp1Y);
         });
         ctx.strokeStyle = "green";
+        ctx.stroke()
+        ctx.closePath();
+
+        ctx.beginPath()
+        ctx.moveTo(update(0).x, update(0).y);
+        Array.from({ length: total }).forEach((_, index) => {
+            ctx.bezierCurveTo(update(index).cp1X, update(index).cp1Y, update(index+1).cp2X, update(index+1).cp2Y, update(index+1).x, update(index+1).y );
+        });
+        ctx.bezierCurveTo(update(total).cp1X, update(total).cp1Y, update(0).cp2X, update(0).cp2Y, update(0).x, update(0).y );
         ctx.stroke()
         ctx.closePath();
     };
@@ -74,14 +83,18 @@ const canvasJs = (selecter, option) => {
         let x = FixedX + Math.cos(radian+rotat) * wave; //+rotat 점θ 회전(축 회전에는 영향을 주지않음)
         let y = FixedY + Math.sin(radian+rotat) * wave; //+rotat 점θ 회전(축 회전에는 영향을 주지않음)
 
-        //(a,b)좌표 축 계산
-        let FixedA = CentserX + ((L+20) * Math.cos(radian+rotat+0.2)); //+rotat 축 회전(점θ 회전에는 영향을 주지않음)
-        let FixedB = CentserY + ((L+20) * Math.sin(radian+rotat+0.2)); //+rotat 축 회전(점θ 회전에는 영향을 주지않음)
+        //(cpX,cpY)좌표 축 계산
+        let FixedCpX = CentserX + ((L+20) * Math.cos(radian+rotat+0.5)); //+rotat 축 회전(점θ 회전에는 영향을 주지않음)
+        let FixedCpY = CentserY + ((L+20) * Math.sin(radian+rotat+0.5)); //+rotat 축 회전(점θ 회전에는 영향을 주지않음)
 
-        //(a,b)좌표 계산
-        let a = FixedA + Math.cos(radian+rotat) * wave; //+rotat 점θ 회전(축 회전에는 영향을 주지않음)
-        let b = FixedB + Math.sin(radian+rotat) * wave; //+rotat 점θ 회전(축 회전에는 영향을 주지않음)
-
+        //(cp1X,cp1Y)좌표 계산
+        let cp1X = FixedCpX + Math.cos(radian+rotat) * wave; //+rotat 점θ 회전(축 회전에는 영향을 주지않음)
+        let cp1Y = FixedCpY + Math.sin(radian+rotat) * wave; //+rotat 점θ 회전(축 회전에는 영향을 주지않음)
+        
+        //(cp1X,cp1Y)좌표 계산 //점(x,y)를 중심으로 x축,y축 대칭
+        let cp2X = 2*x - cp1X;
+        let cp2Y = 2*y - cp1Y;
+        
         //움직임 제어
         angle += PointSpeed;
         rotat += rotationSpeed;
@@ -93,7 +106,7 @@ const canvasJs = (selecter, option) => {
         if (rotat >= Math.PI * 2) {
             rotat -= Math.PI * 2;
         }
-        return {x,y,FixedX,FixedY,FixedA,FixedB,a,b}
+        return {x,y,cp1X,cp1Y,cp2X,cp2Y}
     };
 
     setInterval(draw, 15);
