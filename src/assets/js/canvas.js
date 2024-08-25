@@ -11,8 +11,8 @@ const canvasJs = (selecter, option) => {
 
     const total = 10; //point 개수
     const limit = 30; //움직임 반경
-    const PointSpeed = 0.002; //point속도 제어
-    const rotationSpeed = 0.0003; //축 회전속도 제어
+    const PointSpeed = 0.0002; //point속도 제어
+    const rotationSpeed = 0.00003; //축 회전속도 제어
 
     //변동상수
     let angle = 0;
@@ -46,6 +46,15 @@ const canvasJs = (selecter, option) => {
         });
         ctx.stroke()
         ctx.closePath();
+
+        ctx.beginPath()
+        Array.from({ length: total }).forEach((_, index) => {
+            ctx.moveTo((update(index).x*2 - update(index).a), (update(index).y*2 - (update(index).b)));
+            ctx.lineTo(update(index).a, update(index).b);
+        });
+        ctx.strokeStyle = "green";
+        ctx.stroke()
+        ctx.closePath();
     };
 
     const update = (index) => {
@@ -65,6 +74,14 @@ const canvasJs = (selecter, option) => {
         let x = FixedX + Math.cos(radian+rotat) * wave; //+rotat 점θ 회전(축 회전에는 영향을 주지않음)
         let y = FixedY + Math.sin(radian+rotat) * wave; //+rotat 점θ 회전(축 회전에는 영향을 주지않음)
 
+        //(a,b)좌표 축 계산
+        let FixedA = CentserX + ((L+20) * Math.cos(radian+rotat+0.2)); //+rotat 축 회전(점θ 회전에는 영향을 주지않음)
+        let FixedB = CentserY + ((L+20) * Math.sin(radian+rotat+0.2)); //+rotat 축 회전(점θ 회전에는 영향을 주지않음)
+
+        //(a,b)좌표 계산
+        let a = FixedA + Math.cos(radian+rotat) * wave; //+rotat 점θ 회전(축 회전에는 영향을 주지않음)
+        let b = FixedB + Math.sin(radian+rotat) * wave; //+rotat 점θ 회전(축 회전에는 영향을 주지않음)
+
         //움직임 제어
         angle += PointSpeed;
         rotat += rotationSpeed;
@@ -76,7 +93,7 @@ const canvasJs = (selecter, option) => {
         if (rotat >= Math.PI * 2) {
             rotat -= Math.PI * 2;
         }
-        return {x,y}
+        return {x,y,FixedX,FixedY,FixedA,FixedB,a,b}
     };
 
     setInterval(draw, 15);
