@@ -6,7 +6,7 @@ import canvasJs from "../assets/js/canvas"
 const TestPage = () => {
     useEffect(()=>{
         canvasJs('.test',{
-            size: 700,
+            size: 400,
             background: {
             backgroundStyles: 'color',
             backgroundColor: '#80B1C2',

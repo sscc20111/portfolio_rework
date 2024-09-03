@@ -65,6 +65,22 @@ const canvasJs = (selecter, option) => {
         return {Length,RadianX,RadianY}
     }
 
+    const maxValue = () => {
+        // 모든 좌표 값들을 하나의 배열로 모음
+        const allValues = [...InpitSVG.point, ...InpitSVG.cp1, ...InpitSVG.cp2];
+
+        // x와 y 값을 한 배열에 모음
+        const allCoords = allValues.flatMap(coord => [coord.x, coord.y]);
+
+        // 가장 큰 값 구하기
+        const maxValue = Math.max(...allCoords);
+
+        return maxValue
+    
+    };
+
+    const MaxValue = maxValue();
+
     const draw = () => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         Array.from({ length: 8 }).forEach((_, index) => {
@@ -110,14 +126,14 @@ const canvasJs = (selecter, option) => {
         //x = 빗변길이 * conθ
         //y = 빗변길이 * sinθ
 
-
+        const ratioChange = ((option.size - (limit*2)) / MaxValue);//canvas size에 맞게 svg포인트 변환
         const radian = 2*Math.PI * index / InpitSVG.point.length; //2π*(index/total)
         let wave = Math.sin(angle+radian) * limit; //(0~1)*(움직임 반경) //sinθ로 부드럽게
 
-        let PointX = () => InpitSVG.point[index].x
-        let PointY = () => InpitSVG.point[index].y
-        let Cp1X = () => InpitSVG.cp1[index].x
-        let Cp1Y = () => InpitSVG.cp1[index].y
+        let PointX = () => InpitSVG.point[index].x * ratioChange + limit;
+        let PointY = () => InpitSVG.point[index].y * ratioChange + limit;
+        let Cp1X = () => InpitSVG.cp1[index].x * ratioChange + limit;
+        let Cp1Y = () => InpitSVG.cp1[index].y * ratioChange + limit;
 
         //(x,y)좌표 축 계산
         let FixedX = CentserX + (CatchPoint(PointX(index),PointY(index)).Length * Math.cos(CatchPoint(PointX(index),PointY(index)).RadianX)); //+rotat 축 회전(점θ 회전에는 영향을 주지않음)
