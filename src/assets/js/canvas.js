@@ -8,17 +8,14 @@ const canvasJs = (selecter, option) => {
 
     //setting
     canvas.width = canvas.height = option.size;
-    const CentserX = canvas.width/2;  //중심 x
-    const CentserY = canvas.height/2; //중심 y
+    const CenterX = canvas.width/2;  //중심 x
+    const CenterY = canvas.height/2; //중심 y
 
-    const total = 5; //point 개수
     const limit = 30; //움직임 반경
     const PointSpeed = 0.00051; //point속도 제어
-    const rotationSpeed = 0.0001; //축 회전속도 제어
 
     //변동상수
     let angle = 0;
-    let rotat = 0;
 
     //임시
     const L = 100; //반지름
@@ -58,12 +55,9 @@ const canvasJs = (selecter, option) => {
         ],
     }
 
-    const CatchPoint = ( x, y ) => {
-        const Length = Math.sqrt(Math.pow(x-CentserX,2)+Math.pow(y-CentserY,2))
-        const RadianX = Math.acos((x - CentserX)/Length)
-        const RadianY = Math.asin((y - CentserY)/Length)
-        return {Length,RadianX,RadianY}
-    }
+    const total = InpitSVG.point.length;
+
+
 
     const maxValue = () => {
         // 모든 좌표 값들을 하나의 배열로 모음
@@ -84,40 +78,45 @@ const canvasJs = (selecter, option) => {
     const draw = () => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         Array.from({ length: 8 }).forEach((_, index) => {
+            const {x, y} = update(index);
+
             ctx.beginPath();
-            ctx.arc(update(index).x, update(index).y, 5, 0, 2 * Math.PI);
+            ctx.arc(x, y, 5, 0, 2 * Math.PI);
             ctx.fillStyle = "red";//임시
             ctx.fill();
             ctx.closePath();
         });
         Array.from({ length: 8 }).forEach((_, index) => {
+            const {cp1X, cp2X, cp1Y, cp2Y} = update(index);
+
             ctx.beginPath();
-            ctx.moveTo(update(index).cp1X, update(index).cp1Y);
-            ctx.lineTo(update(index).cp2X, update(index).cp2Y);
+            ctx.moveTo(cp1X, cp1Y);
+            ctx.lineTo(cp2X, cp2Y);
             ctx.strokeStyle = "green";
             ctx.stroke()
             ctx.closePath();
             ctx.beginPath();
-            ctx.arc(update(index).cp1X, update(index).cp1Y, 5, 0, 2 * Math.PI);
+            ctx.arc(cp1X, cp1Y, 5, 0, 2 * Math.PI);
             ctx.fillStyle = "black";//임시
             ctx.fill();
             ctx.closePath();
             ctx.beginPath();
-            ctx.arc(update(index).cp2X, update(index).cp2Y, 5, 0, 2 * Math.PI);
+            ctx.arc(cp2X, cp2Y, 5, 0, 2 * Math.PI);
             ctx.fillStyle = "blue";//임시
             ctx.fill();
             ctx.closePath();
-
         });
-
         ctx.beginPath()
         ctx.moveTo(update(0).x, update(0).y);
-        Array.from({ length: 7 }).forEach((_, index) => {
-            ctx.bezierCurveTo(update(index).cp1X, update(index).cp1Y, update(index+1).cp2X, update(index+1).cp2Y, update(index+1).x, update(index+1).y );
+        Array.from({ length: total-1 }).forEach((_, index) => {
+            const {cp1X, cp1Y} = update(index);
+            const {x, y, cp2X, cp2Y} = update(index+1);
+
+            ctx.bezierCurveTo(cp1X, cp1Y, cp2X, cp2Y, x, y );
         });
-        ctx.bezierCurveTo(update(7).cp1X, update(7).cp1Y, update(0).cp2X, update(0).cp2Y, update(0).x, update(0).y );
+        ctx.bezierCurveTo(update(total-1).cp1X, update(total-1).cp1Y, update(0).cp2X, update(0).cp2Y, update(0).x, update(0).y );
         ctx.strokeStyle = "black";
-        ctx.stroke()
+        ctx.stroke();
         ctx.closePath();
     };
 
@@ -130,26 +129,33 @@ const canvasJs = (selecter, option) => {
         const radian = 2*Math.PI * index / InpitSVG.point.length; //2π*(index/total)
         let wave = Math.sin(angle+radian) * limit; //(0~1)*(움직임 반경) //sinθ로 부드럽게
 
-        let PointX = () => InpitSVG.point[index].x * ratioChange + limit;
-        let PointY = () => InpitSVG.point[index].y * ratioChange + limit;
-        let Cp1X = () => InpitSVG.cp1[index].x * ratioChange + limit;
-        let Cp1Y = () => InpitSVG.cp1[index].y * ratioChange + limit;
+        let PointX = InpitSVG.point[index].x * ratioChange + limit;
+        let PointY = InpitSVG.point[index].y * ratioChange + limit;
+        let Cp1X = InpitSVG.cp1[index].x * ratioChange + limit;
+        let Cp1Y = InpitSVG.cp1[index].y * ratioChange + limit;
+
+        const CatchPoint = ( x, y ) => {
+            const Length = Math.sqrt(Math.pow(x-CenterX,2)+Math.pow(y-CenterY,2))
+            const RadianX = Math.acos((x - CenterX)/Length)
+            const RadianY = Math.asin((y - CenterY)/Length)
+            return {Length,RadianX,RadianY}
+        }
 
         //(x,y)좌표 축 계산
-        let FixedX = CentserX + (CatchPoint(PointX(index),PointY(index)).Length * Math.cos(CatchPoint(PointX(index),PointY(index)).RadianX)); //+rotat 축 회전(점θ 회전에는 영향을 주지않음)
-        let FixedY = CentserY + (CatchPoint(PointX(index),PointY(index)).Length * Math.sin(CatchPoint(PointX(index),PointY(index)).RadianY)); //+rotat 축 회전(점θ 회전에는 영향을 주지않음)
+        let FixedX = CenterX + (CatchPoint(PointX,PointY).Length * Math.cos(CatchPoint(PointX,PointY).RadianX)); //+rotat 축 회전(점θ 회전에는 영향을 주지않음)
+        let FixedY = CenterY + (CatchPoint(PointX,PointY).Length * Math.sin(CatchPoint(PointX,PointY).RadianY)); //+rotat 축 회전(점θ 회전에는 영향을 주지않음)
 
         //(x,y)좌표 계산
-        let x = FixedX + Math.cos(CatchPoint(PointX(index),PointY(index)).RadianX) * wave; //+rotat 점θ 회전(축 회전에는 영향을 주지않음)
-        let y = FixedY + Math.sin(CatchPoint(PointX(index),PointY(index)).RadianY) * wave; //+rotat 점θ 회전(축 회전에는 영향을 주지않음)
+        let x = FixedX + Math.cos(CatchPoint(PointX,PointY).RadianX) * wave; //+rotat 점θ 회전(축 회전에는 영향을 주지않음)
+        let y = FixedY + Math.sin(CatchPoint(PointX,PointY).RadianY) * wave; //+rotat 점θ 회전(축 회전에는 영향을 주지않음)
         
         //(x,y)좌표 축 계산
-        let FixedCpX = CentserX + (CatchPoint(Cp1X(index),Cp1Y(index)).Length * Math.cos(CatchPoint(Cp1X(index),Cp1Y(index)).RadianX)); //+rotat 축 회전(점θ 회전에는 영향을 주지않음)
-        let FixedCpY = CentserY + (CatchPoint(Cp1X(index),Cp1Y(index)).Length * Math.sin(CatchPoint(Cp1X(index),Cp1Y(index)).RadianY)); //+rotat 축 회전(점θ 회전에는 영향을 주지않음)
+        let FixedCpX = CenterX + (CatchPoint(Cp1X,Cp1Y).Length * Math.cos(CatchPoint(Cp1X,Cp1Y).RadianX)); //+rotat 축 회전(점θ 회전에는 영향을 주지않음)
+        let FixedCpY = CenterY + (CatchPoint(Cp1X,Cp1Y).Length * Math.sin(CatchPoint(Cp1X,Cp1Y).RadianY)); //+rotat 축 회전(점θ 회전에는 영향을 주지않음)
 
         //(x,y)좌표 계산
-        let cp1X = FixedCpX + Math.cos(CatchPoint(Cp1X(index),Cp1Y(index)).RadianX) * wave; //+rotat 점θ 회전(축 회전에는 영향을 주지않음)
-        let cp1Y = FixedCpY + Math.sin(CatchPoint(Cp1X(index),Cp1Y(index)).RadianY) * wave; //+rotat 점θ 회전(축 회전에는 영향을 주지않음)
+        let cp1X = FixedCpX + Math.cos(CatchPoint(Cp1X,Cp1Y).RadianX) * wave; //+rotat 점θ 회전(축 회전에는 영향을 주지않음)
+        let cp1Y = FixedCpY + Math.sin(CatchPoint(Cp1X,Cp1Y).RadianY) * wave; //+rotat 점θ 회전(축 회전에는 영향을 주지않음)
         
         //(cp1X,cp1Y)좌표 계산 //점(x,y)를 중심으로 x축,y축 대칭
         let cp2X = 2*x - cp1X;

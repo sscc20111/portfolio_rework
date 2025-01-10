@@ -5,6 +5,7 @@ const GuestBook = () => {
         <>
             <div>Guestbook Page</div>
             <Link to='/'>Main Page Link</Link>
+            <Link to='/testpage'>testpage Page Link</Link>
         </>
     )
 }
