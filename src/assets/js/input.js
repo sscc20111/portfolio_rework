@@ -40,6 +40,7 @@ const maxValue = () => {
 
     // 가장 큰 값 구하기
     const maxValue = Math.max(...allCoords);
+    console.log('test')
 
     return maxValue
 
