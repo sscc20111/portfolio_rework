@@ -1,4 +1,6 @@
 // import { useEffect, useState } from "react";
+import {InpitSVG, maxValue} from './input'
+import asdfa from '../img/intro.jpg'
 
 const canvasJs = (selecter, option) => {
     const container = document.querySelector(selecter);
@@ -10,74 +12,20 @@ const canvasJs = (selecter, option) => {
     canvas.width = canvas.height = option.size;
     const CenterX = canvas.width/2;  //중심 x
     const CenterY = canvas.height/2; //중심 y
+    const total = InpitSVG.point.length;
+    const MaxValue = maxValue();
 
-    const limit = 30; //움직임 반경
-    const PointSpeed = 0.00051; //point속도 제어
+    const 반경 = 10; //출렁임 정도
 
     //변동상수
-    let angle = 0;
+    let 변동상수 = 0;
+    let img;
 
-    //임시
-    const L = 100; //반지름
-
-
-
-    const InpitSVG = {
-        point:[
-            {x:468 ,y:146},
-            {x:302 ,y:28},
-            {x:69 ,y:80},
-            {x:93 ,y:311},
-            {x:129 ,y:485},
-            {x:302 ,y:524},
-            {x:478 ,y:492},
-            {x:626 ,y:311}
-        ],
-        cp1:[
-            {x:376 ,y:138},
-            {x:252 ,y:1},
-            {x:0 ,y:160},
-            {x:110 ,y:423},
-            {x:185 ,y:519},
-            {x:342 ,y:522},
-            {x:534 ,y:468},
-            {x:626 ,y:204}
-        ],
-        cp2:[
-            {x:351 ,y:56},
-            {x:137 ,y:0},
-            {x:77 ,y:199},
-            {x:73 ,y:451},
-            {x:261 ,y:525},
-            {x:422 ,y:516},
-            {x:625 ,y:417},
-            {x:560 ,y:153}
-        ],
-    }
-
-    const total = InpitSVG.point.length;
-
-
-
-    const maxValue = () => {
-        // 모든 좌표 값들을 하나의 배열로 모음
-        const allValues = [...InpitSVG.point, ...InpitSVG.cp1, ...InpitSVG.cp2];
-
-        // x와 y 값을 한 배열에 모음
-        const allCoords = allValues.flatMap(coord => [coord.x, coord.y]);
-
-        // 가장 큰 값 구하기
-        const maxValue = Math.max(...allCoords);
-
-        return maxValue
-    
-    };
-
-    const MaxValue = maxValue();
 
     const draw = () => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        Array.from({ length: 8 }).forEach((_, index) => {
+
+        Array.from({ length: total }).forEach((_, index) => {
             const {x, y} = update(index);
 
             ctx.beginPath();
@@ -85,8 +33,15 @@ const canvasJs = (selecter, option) => {
             ctx.fillStyle = "red";//임시
             ctx.fill();
             ctx.closePath();
+
+            // ctx.beginPath();
+            // ctx.moveTo(CenterX,CenterY);
+            // ctx.lineTo(x, y);
+            // ctx.strokeStyle = "green";
+            // ctx.stroke()
+            // ctx.closePath();
         });
-        Array.from({ length: 8 }).forEach((_, index) => {
+        Array.from({ length: total }).forEach((_, index) => {
             const {cp1X, cp2X, cp1Y, cp2Y} = update(index);
 
             ctx.beginPath();
@@ -105,7 +60,24 @@ const canvasJs = (selecter, option) => {
             ctx.fillStyle = "blue";//임시
             ctx.fill();
             ctx.closePath();
+
+            // ctx.beginPath();
+            // ctx.moveTo(CenterX,CenterY);
+            // ctx.lineTo(cp1X, cp1Y);
+            // ctx.strokeStyle = "green";
+            // ctx.stroke()
+            // ctx.closePath();
+            // ctx.beginPath();
+            // ctx.moveTo(CenterX,CenterY);
+            // ctx.lineTo(cp2X, cp2Y);
+            // ctx.strokeStyle = "green";
+            // ctx.stroke()
+            // ctx.closePath();
         });
+
+        if(option.backgroundStyles === 'img'){
+            ctx.save();
+        }
         ctx.beginPath()
         ctx.moveTo(update(0).x, update(0).y);
         Array.from({ length: total-1 }).forEach((_, index) => {
@@ -115,65 +87,76 @@ const canvasJs = (selecter, option) => {
             ctx.bezierCurveTo(cp1X, cp1Y, cp2X, cp2Y, x, y );
         });
         ctx.bezierCurveTo(update(total-1).cp1X, update(total-1).cp1Y, update(0).cp2X, update(0).cp2Y, update(0).x, update(0).y );
-        ctx.strokeStyle = "black";
-        ctx.stroke();
         ctx.closePath();
+        switch(option.backgroundStyles) {
+            case 'img' :
+                ctx.clip();
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height); 
+                ctx.restore();
+            break;
+            case 'fill' :
+                ctx.fillStyle = option.Color;
+                ctx.fill();
+                break;
+                case 'line' :
+                ctx.strokeStyle = option.Color;
+                ctx.stroke();
+        }
     };
 
+    const lerp = (start, end, t) => start + (end - start) * t;
+    const CatchPoint = ( x, y ) => {
+        const Length = Math.sqrt(Math.pow(x-CenterX,2)+Math.pow(y-CenterY,2));
+        const 라디안 = Math.atan2(y - CenterY, x - CenterX);
+        const RadianX = Math.acos((x - CenterX)/Length);
+        const RadianY = Math.asin((y - CenterY)/Length);
+        return {Length,RadianX,RadianY,라디안}
+    }
+    const transform_Length = (x,y) => Math.sqrt(Math.pow(x-CenterX,2)+Math.pow(y-CenterY,2));
+    const transform_Radian = (x,y) => Math.atan2(y - CenterY, x - CenterX);
+
     const update = (index) => {
-        //직각 삼각형의 좌표평면상 점(x,y)를 구하는 공식을 사용하여 함수 실행
+        const ratioChange = ((option.size - (반경*2)) / MaxValue);//canvas size에 맞게 svg포인트 변환
+        const radian = 2*Math.PI * index / total; //2π*(index/total)
+        const wave = Math.sin(변동상수+radian) * 반경; //(0~1)*(움직임 반경) //sinθ로 부드럽게
+
+        const Fx = InpitSVG.point[index].x * ratioChange + 반경;
+        const Fy = InpitSVG.point[index].y * ratioChange + 반경;
+        const Cp1X = InpitSVG.cp1[index].x * ratioChange + 반경;
+        const Cp1Y = InpitSVG.cp1[index].y * ratioChange + 반경;
+
+        //bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y) 에 필요한 좌표 계산
         //x = 빗변길이 * conθ
         //y = 빗변길이 * sinθ
+        //(x,y)좌표
+        const {라디안:라디안1, Length:Length1} = CatchPoint(Fx,Fy);
+        const x = (Math.cos(라디안1)*Length1+CenterX) + (Math.cos(라디안1)*wave); // x좌표 + wave
+        const y = (Math.sin(라디안1)*Length1+CenterY) + (Math.sin(라디안1)*wave); // y좌표 + wave
 
-        const ratioChange = ((option.size - (limit*2)) / MaxValue);//canvas size에 맞게 svg포인트 변환
-        const radian = 2*Math.PI * index / InpitSVG.point.length; //2π*(index/total)
-        let wave = Math.sin(angle+radian) * limit; //(0~1)*(움직임 반경) //sinθ로 부드럽게
-
-        let PointX = InpitSVG.point[index].x * ratioChange + limit;
-        let PointY = InpitSVG.point[index].y * ratioChange + limit;
-        let Cp1X = InpitSVG.cp1[index].x * ratioChange + limit;
-        let Cp1Y = InpitSVG.cp1[index].y * ratioChange + limit;
-
-        const CatchPoint = ( x, y ) => {
-            const Length = Math.sqrt(Math.pow(x-CenterX,2)+Math.pow(y-CenterY,2))
-            const RadianX = Math.acos((x - CenterX)/Length)
-            const RadianY = Math.asin((y - CenterY)/Length)
-            return {Length,RadianX,RadianY}
-        }
-
-        //(x,y)좌표 축 계산
-        let FixedX = CenterX + (CatchPoint(PointX,PointY).Length * Math.cos(CatchPoint(PointX,PointY).RadianX)); //+rotat 축 회전(점θ 회전에는 영향을 주지않음)
-        let FixedY = CenterY + (CatchPoint(PointX,PointY).Length * Math.sin(CatchPoint(PointX,PointY).RadianY)); //+rotat 축 회전(점θ 회전에는 영향을 주지않음)
-
-        //(x,y)좌표 계산
-        let x = FixedX + Math.cos(CatchPoint(PointX,PointY).RadianX) * wave; //+rotat 점θ 회전(축 회전에는 영향을 주지않음)
-        let y = FixedY + Math.sin(CatchPoint(PointX,PointY).RadianY) * wave; //+rotat 점θ 회전(축 회전에는 영향을 주지않음)
+        //(cp1x,cp1y)좌표
+        const {라디안:라디안2, Length:Length2} = CatchPoint(Cp1X,Cp1Y);
+        const cp1X = (Math.cos(라디안2)*Length2+CenterX) + (Math.cos(라디안2)*wave); // x좌표 + wave 
+        const cp1Y = (Math.sin(라디안2)*Length2+CenterY) + (Math.sin(라디안2)*wave); // y좌표 + wave 
         
-        //(x,y)좌표 축 계산
-        let FixedCpX = CenterX + (CatchPoint(Cp1X,Cp1Y).Length * Math.cos(CatchPoint(Cp1X,Cp1Y).RadianX)); //+rotat 축 회전(점θ 회전에는 영향을 주지않음)
-        let FixedCpY = CenterY + (CatchPoint(Cp1X,Cp1Y).Length * Math.sin(CatchPoint(Cp1X,Cp1Y).RadianY)); //+rotat 축 회전(점θ 회전에는 영향을 주지않음)
+        //(cp2X,cp2Y)좌표 //점(x,y)를 중심으로 x축,y축 대칭
+        const cp2X = 2*x - cp1X;
+        const cp2Y = 2*y - cp1Y;
 
-        //(x,y)좌표 계산
-        let cp1X = FixedCpX + Math.cos(CatchPoint(Cp1X,Cp1Y).RadianX) * wave; //+rotat 점θ 회전(축 회전에는 영향을 주지않음)
-        let cp1Y = FixedCpY + Math.sin(CatchPoint(Cp1X,Cp1Y).RadianY) * wave; //+rotat 점θ 회전(축 회전에는 영향을 주지않음)
+        //움직임 제어 
+        변동상수 = (변동상수+option.speed * 0.00001) % (Math.PI * 2); //rotat 무한 증가 방지
         
-        //(cp1X,cp1Y)좌표 계산 //점(x,y)를 중심으로 x축,y축 대칭
-        let cp2X = 2*x - cp1X;
-        let cp2Y = 2*y - cp1Y;
-
-        
-        //움직임 제어
-        angle += PointSpeed;
-
-        //angle, rotat 무한 증가 방지
-        if (angle >= Math.PI * 2) {
-            angle -= Math.PI * 2;
-        }
-
         return {x,y,cp1X,cp1Y,cp2X,cp2Y}
     };
 
-    setInterval(draw, 15);
+    if (option.backgroundStyles === 'img') { 
+        img = new Image(); 
+        img.src = option.imgSrc; 
+        img.onload = () => { setInterval(draw, 15); // 이미지가 로드된 후에 캔버스를 그립니다. 
+        }; 
+        // console.log(img.src); 
+    } else { 
+        setInterval(draw, 15); // 이미지가 없는 경우 바로 캔버스를 그립니다. 
+    }
 };
 
 export default canvasJs
