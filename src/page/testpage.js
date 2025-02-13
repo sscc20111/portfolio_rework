@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import canvasJs from "../assets/js/canvas"
+import introImg from '../assets/img/intro.jpg'
 
 
 
@@ -7,12 +8,10 @@ const TestPage = () => {
     useEffect(()=>{
         canvasJs('.test',{
             size: 400,
-            background: {
-            backgroundStyles: 'color',
-            backgroundColor: '#80B1C2',
-            globalAlpha: 0.8
-            },
-            speed: 350
+            backgroundStyles: 'img',
+            imgSrc: introImg,
+            Color: 'black',
+            speed: 150
         })
     },[]);
 
