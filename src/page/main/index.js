@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState } from 'react'
+// import { useEffect, useRef, useState } from 'react'
 import { Container } from 'react-bootstrap'
 
 import './assets/style/style.css'
 
-import Section01 from './components/section01'
-import Section02 from './components/section02'
+import Section01 from './section01'
+import Section02 from './section02'
 
 
 const Main = () => {

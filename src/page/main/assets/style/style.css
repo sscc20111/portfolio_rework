@@ -62,6 +62,7 @@
 .MainWrap .section02 span {font-size: 0.8rem; color: #7d7d7d; font-weight: 300;}
 .MainWrap .section02 a {}
 
+.MainWrap .section02 > div {width: 50%;}
 .MainWrap .section02 .leftBox {}
 .MainWrap .section02 .leftBox .contents:not(:last-child) {margin-bottom: 3.5rem;}
 .MainWrap .section02 .leftBox .contents .item:not(:last-child) {margin-bottom: 1.6rem;}
@@ -73,18 +74,30 @@
 .MainWrap .section02 .leftBox .item ul li span {}
 
 .MainWrap .section02 .rightBox {}
-.MainWrap .section02 .rightBox .thumbnailBox {transition: 0.3s cubic-bezier(0.2, 0.6, 0.6, 0.9);}
+.MainWrap .section02 .rightBox .thumbnailWrap {width: 100%; aspect-ratio: 1; position: relative;}
+.MainWrap .section02 .rightBox .thumbnailWrap > div {width: 100%; height: 100%; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);}
+.MainWrap .section02 .rightBox .thumbnailWrap > div > div {width: 100%; height: 100%; display: inline-block; transform: scale(0); transition: all 0.7s cubic-bezier(0.6, 0.05, 0.5, 0.9);}
 
+.MainWrap .section02 .rightBox .thumbnailWrap .introWrap canvas {position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);}
+
+.MainWrap .section02 .rightBox .thumbnailWrap .experienceWrap {}
+.MainWrap .section02 .rightBox .thumbnailWrap .experienceWrap .monitorBox {position: relative; z-index: 3;}
+.MainWrap .section02 .rightBox .thumbnailWrap .experienceWrap .imgBox {aspect-ratio: 16 / 9; left: 50%; overflow: hidden; position: absolute; top: 6.7%; transform: translateX(-50%); width: 92%; z-index: 2;}
+.MainWrap .section02 .rightBox .thumbnailWrap .experienceWrap .imgBox img {position: absolute; z-index: 9;}
+.MainWrap .section02 .rightBox .thumbnailWrap .experienceWrap .imgBox img.ImgItem-enter-active {z-index: 10; opacity: 0;}
+
+.MainWrap .section02 .rightBox .thumbnailWrap .skillWrap {}
+.MainWrap .section02 .rightBox .thumbnailWrap .skillWrap ul {display: flex; justify-content: center; flex-wrap: wrap;}
+.MainWrap .section02 .rightBox .thumbnailWrap .skillWrap ul li {width: 25%; justify-content: center; display: flex;}
+/* .MainWrap .section02 .rightBox .thumbnailWrap .skillWrap ul li div {transform: scale(0); transition: all 0.4s cubic-bezier(0.59, 0.05, 0.51, 0.86);} */
+.MainWrap .section02 .rightBox .thumbnailWrap .skillWrap ul li div img {}
+
+
+.MainWrap .section02 .rightBox .thumbnailWrap.thumbnail1 .introWrap > div {transform: scale(1);}
+.MainWrap .section02 .rightBox .thumbnailWrap.thumbnail2 .experienceWrap > div {transform: scale(1);}
+.MainWrap .section02 .rightBox .thumbnailWrap.thumbnail3 .skillWrap > div {transform: scale(1);}
 
 /* 임시 */
-.MainWrap .section02 .rightBox .thumbnailBox {padding: 30px; background-color: #3c4758; color: white; }
-
-
-
-
-
-
-
 
 
 

@@ -18,7 +18,8 @@ const canvasJs = (selecter, option) => {
     const randomWave = RandomWave(total);
 
     const VIBRATION = 10; //출렁임 계수
-    const CYCLE_SPEED = 0.00009; //변환 속도 계수
+    const CYCLE_SPEED = option.cycle_speed * 0.00009; //변환 속도
+    const VARIATION_SPPED = option.variation_speed * 0.000005 //진동 속도도
 
     //변동값
     let Variation = 0;
@@ -117,7 +118,7 @@ const canvasJs = (selecter, option) => {
 
 
         //움직임 제어 
-        Variation = (Variation + (option.speed * 0.000005 * randomWave[index])) % (Math.PI * 2); //rotat 무한 증가 방지
+        Variation = (Variation + (VARIATION_SPPED * randomWave[index])) % (Math.PI * 2); //rotat 무한 증가 방지
         cycle = (cycle + CYCLE_SPEED) % total;
         metronome = (metronome + CYCLE_SPEED) % 1; //lerp를 위한 0~1 반복
 
