@@ -38,7 +38,7 @@ const ThumbnailMotion = () => {//썸네일 이동 모션 (css '.thumbnailWrap' -
             trigger: ".section02",
             start: `${offsetHeight/2} center`,
             end: `+=${endValue} center`,
-            markers: true,
+            // markers: true,
             onUpdate: self => {gsap.set('.thumbnailWrap', { y: self.progress * (target.offsetHeight-offsetHeight) });}//.section02높이만큼 y증가 (시작점과 끝점의 차이만큼 빼줘야함)
         }
     });
@@ -49,6 +49,7 @@ const AboutSection = () => {
     useEffect(()=>{
         ThumbnailSet(setthumbnailItem)
         ThumbnailMotion()
+        return () =>  ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     },[])
     return(<>
         <div className='leftBox'>

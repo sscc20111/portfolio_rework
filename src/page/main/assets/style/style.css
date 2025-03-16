@@ -1,5 +1,6 @@
 .MainWrap.container {max-width: 1000px;}
-.MainWrap section {margin-bottom: 5rem;}
+.MainWrap .section {margin-bottom: 5rem;}
+.MainWrap .section h2 {margin-bottom: 1.5rem; font-size: 2rem; font-weight: 600; color: rgba(115, 90, 60, 1);}
 
 /* ===== section01(Grid Section) ===== */
 /* Design Style */
@@ -54,7 +55,6 @@
 
 /* ===== section02(About Section) ===== */
 .MainWrap .section02 {display: flex;}
-.MainWrap .section02 h2 {margin-bottom: 1.5rem; font-size: 2rem; font-weight: 600; color: rgba(115, 90, 60, 1);}
 .MainWrap .section02 h3 {margin-bottom: 1.3rem; font-size: 1.3rem; font-weight: 600;}
 .MainWrap .section02 h3 span {font-size: 1rem; font-weight: 300;}
 .MainWrap .section02 h4 {margin-bottom: 1rem; font-size: 1rem; font-weight: 600;}
@@ -97,12 +97,34 @@
 .MainWrap .section02 .rightBox .thumbnailWrap.thumbnail2 .experienceWrap > div {transform: scale(1);}
 .MainWrap .section02 .rightBox .thumbnailWrap.thumbnail3 .skillWrap > div {transform: scale(1);}
 
+
+/* ===== section02(Project Section) ===== */
+.MainWrap .section03 {display: flex;}
+.MainWrap .section03 > div {}
+.MainWrap .section03 > div p {display: inline-block; margin-bottom: 0;}
+.MainWrap .section03 > div span {display: inline-block;}
+
+.MainWrap .section03 .leftBox {width: 40%;}
+.MainWrap .section03 .leftBox > div {}
+.MainWrap .section03 .leftBox > div:not(:last-child) {margin-bottom: 2rem;}
+.MainWrap .section03 .leftBox h3 {margin-bottom: 1rem; font-size: 0.9rem; font-weight: 300;}
+.MainWrap .section03 .leftBox ul {}
+.MainWrap .section03 .leftBox ul li {display: flex; flex-direction: row; align-items: center;}
+.MainWrap .section03 .leftBox ul li:not(:last-child) {margin-bottom: 0.8rem;}
+.MainWrap .section03 .leftBox ul li p {margin-right: 1.5rem; display: flex; align-items: center; text-transform: uppercase; cursor: pointer;}
+.MainWrap .section03 .leftBox ul li p .bullet {position: relative; margin-bottom: 0.2rem; margin-right: 0.5rem; height: 0.9rem; width: 0.9rem; border-radius: 50%; border: 1px solid #000;}
+.MainWrap .section03 .leftBox ul li p .bullet::before {content: ""; position: absolute; display: inline-block; border-radius: 50%; left: 50%; top: 50%; width: 101%; height: 101%; transform: translate(-50%,-50%) scale(0); transition: transform .3s cubic-bezier(.22,.61,.36,1); background-color: #000;}
+.MainWrap .section03 .leftBox ul li p:hover .bullet::before,
+.MainWrap .section03 .leftBox ul li p.focus .bullet::before { transform: translate(-50%,-50%) scale(1);}
+.MainWrap .section03 .leftBox ul li .fillBar {flex: 1 1; height: 1px; background-color: #000;}
+
+.MainWrap .section03 .rightBox {width: 60%;}
+
 /* 임시 */
 
 
 
-.MainWrap .section03 {}
 .MainWrap .section04 {}
 .MainWrap .section05 {}
 
-
+.testBox {padding-bottom: 2000px;}
