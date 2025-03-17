@@ -19,24 +19,21 @@ const InpitSVG = {
         {x:534 ,y:468},
         {x:626 ,y:204}
     ],
-    cp2:[
-        {x:351 ,y:56},
-        {x:137 ,y:0},
-        {x:77 ,y:199},
-        {x:73 ,y:451},
-        {x:261 ,y:525},
-        {x:422 ,y:516},
-        {x:625 ,y:417},
-        {x:560 ,y:153}
-    ],
+    // cp2:[
+    //     {x:351 ,y:56},
+    //     {x:137 ,y:0},
+    //     {x:77 ,y:199},
+    //     {x:73 ,y:451},
+    //     {x:261 ,y:525},
+    //     {x:422 ,y:516},
+    //     {x:625 ,y:417},
+    //     {x:560 ,y:153}
+    // ],
 }
 
 const maxValue = () => {
-    // 모든 좌표 값들을 하나의 배열로 모음
-    const allValues = [...InpitSVG.point, ...InpitSVG.cp1, ...InpitSVG.cp2];
-
     // x와 y 값을 한 배열에 모음
-    const allCoords = allValues.flatMap(coord => [coord.x, coord.y]);
+    const allCoords = InpitSVG.point.flatMap(coord => [coord.x, coord.y]);
 
     // 가장 큰 값 구하기
     const maxValue = Math.max(...allCoords);
@@ -45,3 +42,5 @@ const maxValue = () => {
     return maxValue
 
 };
+
+export {InpitSVG, maxValue}

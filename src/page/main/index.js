@@ -1,10 +1,11 @@
-import { useEffect, useRef, useState } from 'react'
+// import { useEffect, useRef, useState } from 'react'
 import { Container } from 'react-bootstrap'
 
 import './assets/style/style.css'
 
-import Section01 from './components/section01'
-import Section02 from './components/section02'
+import Section01 from './section01'
+import Section02 from './section02'
+import Section03 from './section03'
 
 
 const Main = () => {
@@ -14,15 +15,17 @@ const Main = () => {
 
     return(
         <Container className="MainWrap">
-            <section className="section01">
+            <section className="section section01">
                 <Section01></Section01>
             </section>
-            <section className="section02" id='About'>
+            <section className="section section02" id='About'>
                 <Section02></Section02>
             </section>
-            <section className="section03">Section03</section>
-            <section className="section04">Section04</section>
-            <section className="section05">Section05</section>
+            <section className="section section03">
+                <Section03></Section03>
+            </section>
+            <section className="section section04">Section04</section>
+            <section className="section section05">Section05</section>
         </Container>
     )
 }

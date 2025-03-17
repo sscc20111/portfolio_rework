@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-import ThumbnailComponent from '../assets/js/thumbnail';
+import { Thumbnail1, Thumbnail2, Thumbnail3 } from './components/thumbnail';
 
 
 gsap.registerPlugin(ScrollTrigger)
@@ -20,7 +20,7 @@ const ThumbnailSet = (setthumbnail) => {//위치별 썸네일 컨텐츠 변경
                 trigger: trigger,
                 start: "top center",
                 end: "bottom center",
-                endTrigger: endTrigger ? endTrigger : '', //thumbnail1의 범위가 content 두개에 걸쳐있어 endTrigger 지정
+                endTrigger: endTrigger ? endTrigger : '', //thumbnail1의 범위가 content1,2 두개에 걸쳐있어 endTrigger 지정
                 // markers: true,
                 onEnter: () => setthumbnail(thumbnail),
                 onEnterBack: () => setthumbnail(thumbnail),
@@ -29,14 +29,17 @@ const ThumbnailSet = (setthumbnail) => {//위치별 썸네일 컨텐츠 변경
     });
 };
 
-const ThumbnailMotion = () => {//썸네일 이동 모션 (css '.thumbnailBox' - transition과 같이 사용)
+const ThumbnailMotion = () => {//썸네일 이동 모션 (css '.thumbnailWrap' - transition과 같이 사용)
     const target = document.querySelector('.section02');
+    const offsetHeight = document.querySelector('.section02 .thumbnailWrap').offsetHeight; //thumbnailWrap 높이
+    const endValue = target.offsetHeight - offsetHeight; //전체 길이에서 thumbnailWrap 높이만큼 뺀값
     gsap.timeline({
         scrollTrigger: {
             trigger: ".section02",
-            start: "top center",
-            end: "bottom center",
-            onUpdate: self => {gsap.set('.thumbnailBox', { y: self.progress * target.offsetHeight });}//.section02의 height 값에 백분율을 곱한값
+            start: `${offsetHeight/2} center`,
+            end: `+=${endValue} center`,
+            // markers: true,
+            onUpdate: self => {gsap.set('.thumbnailWrap', { y: self.progress * (target.offsetHeight-offsetHeight) });}//.section02높이만큼 y증가 (시작점과 끝점의 차이만큼 빼줘야함)
         }
     });
 }
@@ -46,9 +49,9 @@ const AboutSection = () => {
     useEffect(()=>{
         ThumbnailSet(setthumbnailItem)
         ThumbnailMotion()
+        return () =>  ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     },[])
-    return(
-        <>
+    return(<>
         <div className='leftBox'>
             <div className='contents content1'>
                 <h2>EDUCATION</h2>
@@ -80,20 +83,20 @@ const AboutSection = () => {
                 <div className='item item1' >
                     <h3>(주)이프론트 <span>(2021.11.24 ~ 2022.12.30)</span></h3>
                     <ul>
-                        <li><a href='http://wowm.1004home.kr/' target="_blank">와우엠 <span>(기업홍보, Fullpage개발(Parallax), 게시판 관리)</span></a></li>
-                        <li><a href='http://iaan.1004home.kr/' target="_blank">이안 <span>(기업홍보, svg모션, 게시판 관리)</span></a></li>
-                        <li><a href='http://ccmlaw.1004home.kr/' target="_blank">충만법무법인 <span>(기업홍보, 상담접수)</span></a></li>
-                        {/* <li><a href='http://com2verse.1004home.kr/' target="_blank">컴투버스 <span>(기업홍보, 게시판 관리)</span></a></li> */}
-                        <li><a href='http://muirim.com/' target="_blank">무이림 <span>(숙박업체, 객실홍보, 예약관리)</span></a></li>
-                        <li><a href='https://www.kandesign.kr/' target="_blank">칸디자인 <span>(기업홍보)</span></a></li>
-                        <li><a href='https://www.pidotech.com/' target="_blank">피도텍 <span>(기업홍보, Fullpage개발, 게시판 관리)</span></a></li>
-                        <li><a href='https://www.apsuninc.com/' target="_blank">앞썬 <span>(기업홍보, 상품관리, 게시판 관리)</span></a></li>
+                        <li><a href='http://wowm.1004home.kr/' target="_blank" rel="noreferrer">와우엠 <span>(기업홍보, Fullpage개발(Parallax), 게시판 관리)</span></a></li>
+                        <li><a href='http://iaan.1004home.kr/' target="_blank" rel="noreferrer">이안 <span>(기업홍보, svg모션, 게시판 관리)</span></a></li>
+                        <li><a href='http://ccmlaw.1004home.kr/' target="_blank" rel="noreferrer">충만법무법인 <span>(기업홍보, 상담접수)</span></a></li>
+                        {/* <li><a href='http://com2verse.1004home.kr/' target="_blank" rel="noreferrer">컴투버스 <span>(기업홍보, 게시판 관리)</span></a></li> */}
+                        <li><a href='http://muirim.com/' target="_blank" rel="noreferrer">무이림 <span>(숙박업체, 객실홍보, 예약관리)</span></a></li>
+                        <li><a href='https://www.kandesign.kr/' target="_blank" rel="noreferrer">칸디자인 <span>(기업홍보)</span></a></li>
+                        <li><a href='https://www.pidotech.com/' target="_blank" rel="noreferrer">피도텍 <span>(기업홍보, Fullpage개발, 게시판 관리)</span></a></li>
+                        <li><a href='https://www.apsuninc.com/' target="_blank" rel="noreferrer">앞썬 <span>(기업홍보, 상품관리, 게시판 관리)</span></a></li>
                     </ul>
                 </div>
             </div>
             <div className='contents content4'>
                 <h2>SKILLS</h2>
-                <div className='item item'>
+                <div className='item item1'>
                     <h4>Frontend</h4>
                     <ul>
                         <li><p>PHP</p></li>
@@ -105,13 +108,13 @@ const AboutSection = () => {
                         <li><p>GSAP</p></li>
                     </ul>
                 </div>
-                <div className='item item'>
+                <div className='item item2'>
                     <h4>Backend</h4>
                     <ul>
                         <li><p>SQL</p></li>
                     </ul>
                 </div>
-                <div className='item item'>
+                <div className='item item3'>
                     <h4>Version Control</h4>
                     <ul>
                         <li><p>Git Hub</p></li>
@@ -121,13 +124,13 @@ const AboutSection = () => {
             </div>
         </div>
         <div className='rightBox'>
-            <div className='thumbnailBox'>
-                {/* 프론트앤드 개발 필요 */}
-                <ThumbnailComponent thumbnailItem={thumbnailItem}></ThumbnailComponent>
+            <div className={`thumbnailWrap ${thumbnailItem}`}>
+                <Thumbnail1></Thumbnail1>
+                <Thumbnail2></Thumbnail2>
+                <Thumbnail3 animationActive={thumbnailItem}></Thumbnail3>
             </div>
         </div>
-        </>
-    )
+    </>)
 }
 
 export default AboutSection

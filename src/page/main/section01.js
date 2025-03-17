@@ -1,7 +1,7 @@
 import gsap from 'gsap';
-import {Power1, Power2, Power3 } from 'gsap';
+// import {Power1, Power2, Power3 } from 'gsap';
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const gridAnimation = async () => {
     const gridWrap = document.querySelector('.section01');
@@ -88,7 +88,7 @@ const GridSection = () => {
             <div className="imgBox">
                 <span className="cover"></span>
                 <figure>
-                    <img style={{background:`url(${require('../assets/img/Grid1.png')}) no-repeat center / cover`}}></img>
+                    <img style={{background:`url(${require('./assets/img/Grid1.png')}) no-repeat center / cover`}}></img>
                 </figure>
             </div>
         </div>
@@ -96,7 +96,7 @@ const GridSection = () => {
             <div className="imgBox">
                 <span className="cover"></span>
                 <figure>
-                    <img style={{background:`url(${require('../assets/img/Grid2.png')}) no-repeat center / cover`}}></img>
+                    <img style={{background:`url(${require('./assets/img/Grid2.png')}) no-repeat center / cover`}}></img>
                 </figure>
             </div>
             <div className="textBox">
@@ -130,7 +130,7 @@ const GridSection = () => {
             <div className="imgBox">
                 <span className="cover"></span>
                 <figure>
-                    <img style={{background:`url(${require('../assets/img/Grid3.png')}) no-repeat center / cover`}}></img>
+                    <img style={{background:`url(${require('./assets/img/Grid3.png')}) no-repeat center / cover`}}></img>
                 </figure>
             </div>
         </div>
