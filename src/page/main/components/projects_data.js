@@ -1,5 +1,5 @@
-export const getProjectsData = [
-    {toyProjects: [        
+export const getProjectsData = {
+    toyProjects: [        
         {
             link:'https://sscc20111.github.io/todolist/',
             source:require('../assets/img/todo.png'),
@@ -21,8 +21,8 @@ export const getProjectsData = [
             desc: ['오픈API(SeoulApi, KopisApi)를 이용한 어플 구현'],
             skills: ['React.js', 'JavaScript', 'RESTfull API']
         },
-    ]},
-    {myProjects : [
+    ],
+    myProjects : [
         {
             link:'canvasNav',
             source:require('../assets/img/canvas.png'),
@@ -37,5 +37,5 @@ export const getProjectsData = [
             desc:['mysql을 이용한 데이터 상태 관리', 'gsap-flip을 사용한 모션 구현', 'login기능과 연동하여 글작성 및 수정, 삭제 권한 구현'],
             skills: ['React.js', 'php', 'mysql', 'gsap-flip']
         },
-    ]}
-];
+    ]
+};

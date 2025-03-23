@@ -6,6 +6,7 @@ import './assets/style/style.css'
 import Section01 from './section01'
 import Section02 from './section02'
 import Section03 from './section03'
+import Section04 from './section04'
 
 
 const Main = () => {
@@ -24,7 +25,9 @@ const Main = () => {
             <section className="section section03">
                 <Section03></Section03>
             </section>
-            <section className="section section04">Section04</section>
+            <section className="section section04">
+                <Section04></Section04>
+            </section>
             <section className="section section05">Section05</section>
         </Container>
     )
