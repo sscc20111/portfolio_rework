@@ -1,3 +1,9 @@
+.header {margin: 1rem 0; height: 5rem; width: 100%; position: fixed; top: 0;}
+.header .logoWrap {position: relative; margin-bottom: 0; height: 100%; aspect-ratio: 1;}
+.header .logoWrap div {transform: scale(0);}
+.header .logoWrap a {cursor: pointer;}
+
+
 .MainWrap.container {max-width: 1000px;}
 .MainWrap .section {margin-bottom: 5rem;}
 .MainWrap .section h2 {margin-bottom: 1.5rem; font-size: 2rem; font-weight: 600; color: rgba(115, 90, 60, 1);}
