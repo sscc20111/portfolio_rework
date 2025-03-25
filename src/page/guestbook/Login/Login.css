@@ -1,0 +1,20 @@
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+.loginBox {z-index: 9999; margin-top: auto;}
+.loginBox *{font-family: "Roboto", sans-serif; font-size: 14px;}
+.loginBox .form { text-align: center; }
+
+.loginBox .form .inputBox {display: flex; justify-content: flex-end;}
+.loginBox .form .inputBox input {width: 40%;}
+.loginBox .form .inputBox input::placeholder {color: #000;}
+.loginBox .form .inputBox p {padding: 0 1rem; margin: 0;}
+.loginBox .form .userName {}
+.loginBox .form .userSign {}
+
+.loginBox .form input { font-size: 14px; background: transparent; width: 100%; border-bottom: solid 1px #000; border-left: 0; border-right: 0; border-top: 0; box-sizing: border-box; }
+.loginBox .form input:focus-visible { outline: none; }
+/* .loginBox .form button { text-transform: uppercase; background: #4CAF50; width: 100%; border: 0; color: #FFFFFF; -webkit-transition: all 0.3s ease; transition: all 0.3s ease; cursor: pointer; }
+.loginBox .form button:hover,.form button:active,.form button:focus { background: #43A047; } */
+.loginBox .form .message { color: #b3b3b3; font-size: 12px; }
+.loginBox .form .message a { color: #4CAF50; text-decoration: none; }

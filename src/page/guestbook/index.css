@@ -1,0 +1,111 @@
+.board {
+    background-color: brown;
+    width: 100%;
+    background: #B89569;
+    background: -moz-radial-gradient(center, ellipse cover, #B89569 57%, #B89569 99%);
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(57%, #B89569), color-stop(99%, #B89569));
+    background: -webkit-radial-gradient(center, ellipse cover, #B89569 57%, #B89569 99%);
+    background: -o-radial-gradient(center, ellipse cover, #B89569 57%, #B89569 99%);
+    background: -ms-radial-gradient(center, ellipse cover, #B89569 57%, #B89569 99%);
+    background: radial-gradient(ellipse at center, #B89569 57%, #B89569 99%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#B89569', endColorstr='#B89569', GradientType=1); }
+
+.board .postit { height: 150px; width: 150px; background-color: #ff9; margin: 2px 0; position: absolute; cursor: -webkit-grab; -webkit-box-shadow: 5px 5px 15px 0 rgba(0, 0, 0, .2); box-shadow: 5px 5px 15px 0 rgba(0, 0, 0, .2); }
+.board .postit:active { cursor: -webkit-grabbing; }
+.board .postit p { font-size: 22px; padding: 5px; font-family: "Shadows Into Light", Arial; }
+.board .postit > span { position: absolute; bottom: 2px; right: 2px; transform: scale(0.9); opacity: 0.15; transition: all .15s ease-in-out; transform-origin: bottom right; }
+.board .postit:hover > span { opacity: 1; transform: scale(1); }
+.board .postit button { padding: 0.2rem 0.4rem; font-size: 0.9rem; margin: 2px;}
+.board .postit > textarea { height: 75%; background: rgba(255, 255, 255, .5); }
+.board .postit.dumypostit {opacity: 0;}
+.board .postit.dumypostit.flipActive {opacity: 1;}
+
+
+.flipForm { display: none; transform: translate(-50%,-50%); left: 50%; top: 50%; }
+.postitForm.flipActive { display: none; }
+
+
+
+
+
+
+
+.perspective {transform-style: preserve-3d; perspective: 1400px;}
+.wh-100 {width: 100%; height: 100%;}
+
+.postitBox {width: 300px; height: 400px; border-radius: 20px; position: absolute; top: 50%;left: 50%; transform: translate(-50%,-50%);}
+.postitBox .postitWrap button {background: #0000; border: none; cursor: pointer;}
+
+.postitBox .postitWrap .postitCoverFront { z-index: 3;}
+.postitBox .postitWrap .postitCoverFront .coverWrap { position: absolute; top: 50%;left: 50%; transform: translate(-50%,-50%); z-index: 2;}
+.postitBox .postitWrap .postitCoverFront .coverWrap .cover {position: absolute; backface-visibility: hidden; border-radius: 10px; transition: all 0.7s ease-in-out; transform: translateZ(5px) rotateX(0deg); transform-origin: top; background: rgba(175, 190, 180, 1);}
+.postitBox .postitWrap .postitCoverFront .coverWrap .postitBoxClose {position: absolute; top: 10px; right: 10px; font-size: 1rem;}
+.postitBox .postitWrap .postitCoverFront .coverWrap .cover > h3 { text-align: center; font-size: 1.8rem; font-weight: 800;} 
+.postitBox .postitWrap .postitCoverFront .coverWrap .cover.coverOpen {transform: translateZ(5px) rotateX(180deg);}
+
+.postitBox .postitWrap .postitCoverFront .coverWrap .cover.coverFront {padding: 30% 0 0; display: flex; flex-direction: column; justify-content: space-between;}
+.postitBox .postitWrap .postitCoverFront .coverWrap .cover.coverBack {background: rgba(175, 190, 180, 1); transform: rotateY(180deg);}
+.postitBox .postitWrap .postitCoverFront .coverWrap .cover.coverBack p {transform: rotateX(180deg) rotateY(180deg);}
+.postitBox .postitWrap .postitCoverFront .coverWrap .cover.coverBack.coverOpen {transform: translateZ(5px) rotateX(180deg) rotateY(180deg);}
+
+.postitBox .postitWrap .postitCoverFront .shadowWrap { width: 140%; left: 70%; perspective: 2300px; pointer-events: none; position: absolute; top: 50%; transform: translate(-50%,-50%); perspective-origin: right; z-index: 1;}
+.postitBox .postitWrap .postitCoverFront .shadowWrap .shadow {width: 70%; border-radius: 10px; box-shadow: -4px 4px 3px rgba(113, 112, 117, 0.55); transition: all 0.7s cubic-bezier(0.4, 0.15, 0.6, 0.85); transform: translateZ(5px) rotateX(0deg); transform-origin: top; background: #ada1a1;}
+.postitBox .postitWrap .postitCoverFront .shadowWrap .shadow.coverOpen {transform: translateZ(5px) rotateX(180deg); animation: test 1s forwards linear;}
+.postitBox .postitWrap .postitCoverFront .shadowWrap .shadow.coverClose {animation: test2 linear 0.6s forwards;}
+
+
+.postitBox .postitWrap .postitCover { border-radius: 10px; position: absolute; top: 0;left: 0;}
+.postitBox .postitWrap .postitCoverBack {z-index: 1; display: flex; flex-direction: column; justify-content: space-between; text-align: center; box-shadow: -4px -4px 3px rgba(113, 112, 117, 0.55); background: rgba(175, 190, 180, 1);}
+.postitBox .postitWrap .postitCoverBack .postitHeader { color: #3f3a3a;}
+.postitBox .postitWrap .postitCoverBack .postitHeader span {margin: 0.7rem 0 0; font-size: 0.7rem; font-style: oblique; display: block;}
+.postitBox .postitWrap .postitCoverBack .postitHeader h3 {margin: 1.3rem 0; font-size: 1rem; font-weight: 700;}
+.postitBox .postitWrap .postitCoverBack .postitHeader p {margin: 0; font-size: 0.8rem;}
+.postitBox .postitWrap .postitCoverBack .postitFooter {margin: 0.8rem 1rem; font-size: 0.8rem; text-align: right; font-weight: 300; display: flex; justify-content: space-between;}
+
+.postitBox .postitWrap .postitFormWrap {width: 80%; height: 240px; z-index: 2; background: #fff; position: absolute; top: 58%;left: 50%; transform: translate(-50%,-50%);}
+.postitBox .postitWrap .postitFormWrap .postitTable {background: #fff; z-index: 2;position: relative;display: flex; flex-direction: column; justify-content: space-between;}
+.postitBox .postitWrap .postitFormWrap .postitTable {border-bottom-right-radius: 60px 10px;background: linear-gradient(135deg, #ffffff 81%,#ffffff 82%,#ffffff 82%,#d6d6d6 100%);}
+.postitBox .postitWrap .postitFormWrap .postitTable textarea {background: transparent; resize: none;}
+.postitBox .postitWrap .postitFormWrap .postitTable label {width: 100%;}
+.postitBox .postitWrap .postitFormWrap .postitTable .buttons {position: absolute; display: flex; justify-content: space-between; width: 100%; bottom: 0;}
+.postitBox .postitWrap .postitFormWrap .postitTable .postitForm.flipActive { display: none; }
+.postitBox .postitWrap .postitFormWrap span {width: 100%;height: 100%; display: block; position: absolute; top: 50%;left: 50%;transform: translate(-50%,-50%); z-index: 1;}
+.postitBox .postitWrap .postitFormWrap span:nth-child(2) {box-shadow: -2px -2px 2px rgba(113, 112, 117, 0.75);}
+.postitBox .postitWrap .postitFormWrap span:nth-child(3) {box-shadow: -4px -4px 2px rgba(113, 112, 117, 0.75);}
+.postitBox .postitWrap .postitFormWrap span:nth-child(4) {box-shadow: -6px -6px 2px rgba(113, 112, 117, 0.75);}
+
+
+.modifyFormBox {width: 240px; height: 240px; z-index: 2; display: none; position: absolute; top: 58%;left: 50%; transform: translate(-50%,-50%);}
+.modifyFormBox .postitForm {display: none; background: #fff;}
+.modifyFormBox .postitForm.flipActive {display: block;}
+.modifyFormBox .postitTable {background: #fff; z-index: 2;position: relative;display: flex; flex-direction: column; justify-content: space-between;}
+.modifyFormBox .postitTable {border-bottom-right-radius: 60px 10px;background: linear-gradient(135deg, #ffffff 81%,#ffffff 82%,#ffffff 82%,#d6d6d6 100%);}
+.modifyFormBox .postitTable textarea {background: transparent; resize: none;}
+.modifyFormBox .postitTable label {width: 100%;}
+.modifyFormBox .postitTable .buttons {position: absolute; display: flex; justify-content: space-between; width: 100%; bottom: 0;}
+.modifyFormBox span {width: 100%;height: 100%; display: block; position: absolute; top: 50%;left: 50%;transform: translate(-50%,-50%); z-index: 1;}
+.modifyFormBox span:nth-child(2) {box-shadow: -2px -2px 2px rgba(113, 112, 117, 0.75);}
+.modifyFormBox span:nth-child(3) {box-shadow: -4px -4px 2px rgba(113, 112, 117, 0.75);}
+.modifyFormBox span:nth-child(4) {box-shadow: -6px -6px 2px rgba(113, 112, 117, 0.75);}
+
+
+@keyframes test {
+    0%  {filter: blur(1px);}
+    50% {filter: blur(20px);}
+    100%{filter: blur(1px);}
+}
+@keyframes test2 {
+    0%  {filter: blur(1px);}
+    50% {filter: blur(20px);}
+    100%{filter: blur(1px);}
+}
+
+
+
+.postitBtn {width: 100px; height: 150px; border-radius: 5px; box-shadow: -2px -2px 1px rgba(113, 112, 117, 0.55); transition: all 0.3s; cursor: pointer; background: rgba(175, 190, 180, 1); position: absolute; top: 150px; left: 3%;}
+.postitBtn:hover {box-shadow: -3px -3px 2px rgba(113, 112, 117, 0.55); transform: translate(-2px,-2px);}
+.postitBtn h4 {margin-top: 2rem; font-size: 0.6rem; font-weight: 800; text-align: center;}
+.postitBtn.flipActive {display: none;}
+
+.postitBox {display: none;} 
+.postitBox.flipActive {display: block; z-index: 9999;} 
