@@ -1,7 +1,6 @@
 // import { useEffect, useState } from "react";
 import { InpitSVG, maxValue } from './input'
 import { RandomWave, lerp, lerpAngle, CatchPoint, maxValue2 } from './calculate'
-import asdfa from '../img/intro.jpg'
 
 const canvasJs = (selecter, option) => {
     const container = document.querySelector(selecter);
@@ -16,8 +15,8 @@ const canvasJs = (selecter, option) => {
     const MaxValue = maxValue();
     const MaxValue2 = maxValue2(InpitSVG.point);
     const randomWave = RandomWave(total);
-
-    const VIBRATION = 10; //출렁임 계수
+    
+    const VIBRATION = (option.VIBRATION !== undefined) ? option.VIBRATION : 10; //출렁임 계수 (추후 수정 필요함 임의로 option값을 추가하여 오류 수정함(hreader에서의 cnvas가 너무작아 출렁임이 기형처럼 작동함))
     const CYCLE_SPEED = option.cycle_speed * 0.00009; //변환 속도
     const VARIATION_SPPED = option.variation_speed * 0.000005 //진동 속도도
 

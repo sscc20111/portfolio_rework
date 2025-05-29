@@ -15,7 +15,7 @@ export const getProjectsData = {
             skills: ['React.js', 'JavaScript']
         },
         {
-            link:'CulturalLife',
+            link:'http://nmwoo.info/cultural',
             source:require('../assets/img/cultualLife.png'),
             title:'Cultural Life',
             desc: ['오픈API(SeoulApi, KopisApi)를 이용한 어플 구현'],
@@ -31,7 +31,7 @@ export const getProjectsData = {
             skills: ['JavaScript']
         },
         {
-            link:'guestbook',
+            link:'#guestbook',
             source:require('../assets/img/GuestBook.png'),
             title:'GuestBook',
             desc:['mysql을 이용한 데이터 상태 관리', 'gsap-flip을 사용한 모션 구현', 'login기능과 연동하여 글작성 및 수정, 삭제 권한 구현'],

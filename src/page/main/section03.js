@@ -31,7 +31,11 @@ const ProjectSection = () => {
         <h2>Projects View</h2>
         <div className="viewBox">
             <div className="thumbnailBox">
-                <img src={ViewItem.source}></img>
+                {(ViewItem.title !== 'canvas.js') ? 
+                <a href={ViewItem.link} target="_blank" rel="noopener noreferrer">
+                    <img src={ViewItem.source}></img>
+                </a>
+                : <img src={ViewItem.source}></img>}
             </div>
             <div className="infoWrap">
                 <h4>{ViewItem.title}</h4>

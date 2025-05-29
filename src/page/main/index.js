@@ -28,7 +28,6 @@ const Main = () => {
             <section className="section section04">
                 <Section04></Section04>
             </section>
-            <section className="section section05">Section05</section>
         </Container>
     )
 }

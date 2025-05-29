@@ -1,4 +1,5 @@
-.header {margin: 1rem 0; height: 5rem; width: 100%; position: fixed; top: 0;}
+.App {overflow: hidden;}
+.header {margin: 1rem 0; height: 5rem; width: 100%; position: fixed; display: flex; top: 0;}
 .header .logoWrap {position: relative; margin-bottom: 0; height: 100%; aspect-ratio: 1;}
 .header .logoWrap div {transform: scale(0);}
 .header .logoWrap a {cursor: pointer;}
@@ -13,10 +14,6 @@
 .MainWrap .section01 {display: grid; grid-template-columns: 1fr;}
 .MainWrap .section01 .gridItems {display: grid; grid-template-columns: 1fr 1fr;}
 .MainWrap .section01 .gridItems > div {position: relative;}
-.MainWrap .section01 .gridItems .gridItem1 {}
-.MainWrap .section01 .gridItems .gridItem2 {}
-.MainWrap .section01 .gridItems .gridItem3 {}
-.MainWrap .section01 .gridItems .textBox {}
 .MainWrap .section01 .gridItems .textBox .textWrap {position: relative; display: flex; flex-direction: column; align-items: baseline; z-index: 9;}
 .MainWrap .section01 .gridItems .textBox .textWrap a {display: inline-block; padding: 0.4rem 0; font-size: 4.3rem; font-weight: 600; color: #212529; transition: color 0.3s ease-in-out; cursor: pointer;}
 .MainWrap .section01 .gridItems .textBox .textWrap a:hover {color: #3c4758;}
@@ -66,36 +63,28 @@
 .MainWrap .section02 h4 {margin-bottom: 1rem; font-size: 1rem; font-weight: 600;}
 .MainWrap .section02 p {font-size: 1rem; font-weight: 300;}
 .MainWrap .section02 span {font-size: 0.8rem; color: #7d7d7d; font-weight: 300;}
-.MainWrap .section02 a {}
 
 .MainWrap .section02 > div {width: 50%;}
-.MainWrap .section02 .leftBox {}
 .MainWrap .section02 .leftBox .contents:not(:last-child) {margin-bottom: 3.5rem;}
 .MainWrap .section02 .leftBox .contents .item:not(:last-child) {margin-bottom: 1.6rem;}
 .MainWrap .section02 .leftBox .contents .item ul {padding-left: 0.5rem;}
 .MainWrap .section02 .leftBox .contents .item ul li:not(:last-child) {margin-bottom: 1rem;}
 .MainWrap .section02 .leftBox .content3 .item ul li::before { margin-right: 0.5rem; font-weight: 600; content: '·'; display: inline-block;}
 
-.MainWrap .section02 .leftBox .item ul li {}
-.MainWrap .section02 .leftBox .item ul li span {}
 
-.MainWrap .section02 .rightBox {}
 .MainWrap .section02 .rightBox .thumbnailWrap {width: 100%; aspect-ratio: 1; position: relative;}
 .MainWrap .section02 .rightBox .thumbnailWrap > div {width: 100%; height: 100%; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);}
 .MainWrap .section02 .rightBox .thumbnailWrap > div > div {width: 100%; height: 100%; display: inline-block; transform: scale(0); transition: all 0.7s cubic-bezier(0.6, 0.05, 0.5, 0.9);}
 
-.MainWrap .section02 .rightBox .thumbnailWrap .introWrap canvas {position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);}
+.MainWrap .section02 .rightBox .thumbnailWrap .introWrap canvas {max-width: 90%; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);}
 
-.MainWrap .section02 .rightBox .thumbnailWrap .experienceWrap {}
 .MainWrap .section02 .rightBox .thumbnailWrap .experienceWrap .monitorBox {position: relative; z-index: 3;}
 .MainWrap .section02 .rightBox .thumbnailWrap .experienceWrap .imgBox {aspect-ratio: 16 / 9; left: 50%; overflow: hidden; position: absolute; top: 6.7%; transform: translateX(-50%); width: 92%; z-index: 2;}
 .MainWrap .section02 .rightBox .thumbnailWrap .experienceWrap .imgBox img {position: absolute; z-index: 9;}
 .MainWrap .section02 .rightBox .thumbnailWrap .experienceWrap .imgBox img.ImgItem-enter-active {z-index: 10; opacity: 0;}
 
-.MainWrap .section02 .rightBox .thumbnailWrap .skillWrap {}
 .MainWrap .section02 .rightBox .thumbnailWrap .skillWrap ul {display: flex; justify-content: center; flex-wrap: wrap;}
 .MainWrap .section02 .rightBox .thumbnailWrap .skillWrap ul li {width: 25%; justify-content: center; display: flex;}
-.MainWrap .section02 .rightBox .thumbnailWrap .skillWrap ul li div img {}
 
 
 .MainWrap .section02 .rightBox .thumbnailWrap.thumbnail1 .introWrap > div {transform: scale(1);}
@@ -105,14 +94,11 @@
 
 /* ===== section02(Project Section) ===== */
 .MainWrap .section03 {gap: 5%; display: grid; grid-template-columns: 1fr 1fr;}
-.MainWrap .section03 > div {}
 .MainWrap .section03 > div p {display: inline-block; margin-bottom: 0;}
 .MainWrap .section03 > div span {display: inline-block;}
 
-.MainWrap .section03 .leftBox > div {}
 .MainWrap .section03 .leftBox > div:not(:last-child) {margin-bottom: 2rem;}
 .MainWrap .section03 .leftBox h3 {margin-bottom: 1rem; font-size: 0.9rem; font-weight: 300;}
-.MainWrap .section03 .leftBox ul {}
 .MainWrap .section03 .leftBox ul li {display: flex; flex-direction: row; align-items: center;}
 .MainWrap .section03 .leftBox ul li:not(:last-child) {margin-bottom: 0.8rem;}
 .MainWrap .section03 .leftBox ul li p {margin-right: 1.5rem; display: flex; align-items: center; text-transform: uppercase; cursor: pointer;}
@@ -122,14 +108,9 @@
 .MainWrap .section03 .leftBox ul li p.focus .bullet::before { transform: translate(-50%,-50%) scale(1);}
 .MainWrap .section03 .leftBox ul li .fillBar {flex: 1 1; height: 1px; background-color: #000;}
 
-.MainWrap .section03 .rightBox {}
-.MainWrap .section03 .rightBox .viewBox {}
-.MainWrap .section03 .rightBox .viewBox .thumbnailBox {}
 .MainWrap .section03 .rightBox .viewBox .thumbnailBox a {cursor: pointer;}
 .MainWrap .section03 .rightBox .viewBox .infoWrap {padding-top: 2rem;}
 .MainWrap .section03 .rightBox .viewBox .infoWrap h4 { text-transform: uppercase;}
-.MainWrap .section03 .rightBox .viewBox .infoWrap ul {}
-.MainWrap .section03 .rightBox .viewBox .infoWrap ul li {}
 .MainWrap .section03 .rightBox .viewBox .infoWrap .info_desc {margin: 1rem 0;}
 .MainWrap .section03 .rightBox .viewBox .infoWrap .info_desc li {font-size: 1rem; font-weight: 300;}
 .MainWrap .section03 .rightBox .viewBox .infoWrap .info_desc li::before { margin-right: 0.5rem; font-weight: 600; content: '·'; display: inline-block;}
@@ -140,20 +121,60 @@
 
 
 .MainWrap .section04 .contactWrap {display: grid; grid-template-columns: 1fr 1fr;}
-.MainWrap .section04 .contactWrap .leftBox {}
 .MainWrap .section04 .contactWrap .leftBox h2 {margin-bottom: 3rem; font-size: 3rem; font-weight: 600;}
 .MainWrap .section04 .contactWrap .leftBox h3 {margin-bottom: 2rem; font-size: 2rem; font-weight: 300;}
 .MainWrap .section04 .contactWrap .leftBox h3 span {font-size: 1.5rem; font-weight: 100;}
-.MainWrap .section04 .contactWrap .leftBox ul {}
 .MainWrap .section04 .contactWrap .leftBox ul li:not(:last-child) {margin-bottom: 1rem;}
 .MainWrap .section04 .contactWrap .leftBox ul li h4 {font-size: 1.5rem;}
 .MainWrap .section04 .contactWrap .leftBox ul li p {font-size: 1.2rem; font-weight: 300;}
 
 /* 임시 */
+@media (max-width:1200px) {
+    .header {margin: 0.5rem 0; height: 4rem; z-index: 9999; justify-content: flex-end;}
+    .header canvas {width: 80px;}
+}
 
+@media (max-width: 900px) {
+    html {font-size: 14px;}
+    .header {margin: 1rem 0; height: 4rem;}
 
+    .MainWrap .section01 .gridItems .textBox .textWrap p {margin-top: 2rem;}
+}
 
-.MainWrap .section04 {}
-.MainWrap .section05 {}
+@media (max-width: 768px) {
+    html {font-size: 12px;}
+
+    .MainWrap .section01.active .gridItems.active .textBox .cover.active {width: 320px}
+}
+
+@media (max-width: 670px) {
+    .MainWrap .section01 .gridItems .textBox .textWrap h4,
+    .MainWrap .section01 .gridItems .textBox .textWrap a {font-size: 3.5rem;}
+
+    .MainWrap .section01.active .gridItems.active .textBox .cover.active {width: 240px}
+}
+
+@media (max-width: 550px) {
+    .MainWrap .section01 .gridItems .textBox .textWrap h4,
+    .MainWrap .section01 .gridItems .textBox .textWrap a {font-size: 3rem;}
+
+    .MainWrap .section04 .contactWrap .leftBox h2 {font-size: 2.5rem; margin-bottom: 2rem;}
+}
+
+@media (max-width: 480px) {
+    html {font-size: 10px;}
+
+    .MainWrap .section01 .gridItems .textBox .textWrap p {margin-top: 1.5rem;}
+    .MainWrap .section01 .gridItems .imgBox figure {max-height: 300px;}
+
+    .MainWrap .section h2 {font-size: 1.7rem;}
+    .MainWrap .section02 h3 {font-size: 1.2rem; margin-bottom: 1rem;}
+    .MainWrap .section02 h3 span {font-size: 0.8rem;}
+    .MainWrap .section02 p {margin-bottom: 0.6rem;}
+    .MainWrap .section02 .leftBox .contents:not(:last-child) {margin-bottom: 2.5rem;}
+
+    .MainWrap .section01 .gridItems .textBox .textWrap h4,
+    .MainWrap .section01 .gridItems .textBox .textWrap a {font-size: 3rem; margin: 0;}
+}
 
 .testBox {padding-bottom: 2000px;}

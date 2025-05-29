@@ -1,4 +1,5 @@
 import gsap from 'gsap';
+import { Link } from 'react-router-dom';
 // import {Power1, Power2, Power3 } from 'gsap';
 
 import { useEffect, useState } from 'react'
@@ -82,7 +83,8 @@ const GridSection = () => {
                 <div className="textWrap">
                     <a className='navigationBtn' href='#About' onMouseEnter={(e)=>imgMotionStage(e, setStage)} onMouseMove={(e)=>imgMotion(e, Stage, imgtargets)}>About</a>
                     <a className='navigationBtn' href='#Projects' onMouseEnter={(e)=>imgMotionStage(e, setStage)} onMouseMove={(e)=>imgMotion(e, Stage, imgtargets)}>Projects</a>
-                    <a className='navigationBtn' href='#GuestBook' onMouseEnter={(e)=>imgMotionStage(e, setStage)} onMouseMove={(e)=>imgMotion(e, Stage, imgtargets)}>GuestBook</a>
+                    {/* <a className='navigationBtn' href='#GuestBook' onMouseEnter={(e)=>imgMotionStage(e, setStage)} onMouseMove={(e)=>imgMotion(e, Stage, imgtargets)}>GuestBook</a> */}
+                    <Link to="/guestbook" className='navigationBtn' onMouseEnter={(e)=>imgMotionStage(e, setStage)} onMouseMove={(e)=>imgMotion(e, Stage, imgtargets)}>GuestBook</Link>
                 </div>
             </div>
             <div className="imgBox">

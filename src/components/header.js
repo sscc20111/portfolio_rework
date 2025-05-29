@@ -11,7 +11,8 @@ const Header = () => {
             backgroundStyles: 'fill',
             Color: '#80B1C2',
             variation_speed: 200,
-            cycle_speed: 1.5
+            cycle_speed: 1.5,
+            VIBRATION : 2
         })
         // canvasJs('.header .logo_line',{
         //     size: 80,
